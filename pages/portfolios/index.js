@@ -5,9 +5,11 @@ import BasePage from "@/components/BasePage";
 import { useEffect, useState } from 'react';
  import Link from 'next/link';
 import { useGetPosts } from '@/actions';
+import {useGetUser} from '@/actions/user';
 
 const Portfolios = () => { 
 const { data, error, loading } = useGetPosts();
+const {data: dataU , loading: loadingU} =useGetUser();
 
   const renderPosts = (posts) => {
     return posts.map(post =>
@@ -21,7 +23,7 @@ const { data, error, loading } = useGetPosts();
     )
   }
     return (
-      <BaseLayout>
+      <BaseLayout user ={dataU} loading = {loadingU}>
         <BasePage>
           <h1>I am Portfolio Page</h1>
           { loading && 
